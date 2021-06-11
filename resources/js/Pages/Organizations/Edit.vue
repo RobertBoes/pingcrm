@@ -26,7 +26,7 @@
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
           <button v-if="!organization.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Organization</button>
-          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update Organization</loading-button>
+          <loading-button :loading="form.processing" :is-dirty="form.isDirty" class="btn-indigo ml-auto" type="submit">Update Organization</loading-button>
         </div>
       </form>
     </div>
