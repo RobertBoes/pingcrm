@@ -67,6 +67,7 @@ class OrganizationsController extends Controller
                 'postal_code' => $organization->postal_code,
                 'deleted_at' => $organization->deleted_at,
                 'contacts' => $organization->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
+                'items' => session('items', ['one']),
             ],
         ]);
     }
@@ -86,7 +87,7 @@ class OrganizationsController extends Controller
             ])
         );
 
-        return Redirect::back()->with('success', 'Organization updated.');
+        return Redirect::back()->with('success', 'Organization updated.')->with('items', Request::input('items', ['one']));
     }
 
     public function destroy(Organization $organization)

@@ -23,6 +23,10 @@
             <option value="US">United States</option>
           </select-input>
           <text-input v-model="form.postal_code" :error="form.errors.postal_code" class="pr-6 pb-8 w-full lg:w-1/2" label="Postal code" />
+          <div class="mb-2">
+            <button class="text-green-600 hover:underline" tabindex="-1" type="button" @click="push">Push to array</button>
+            <button class="text-green-600 hover:underline ml-2" tabindex="-1" type="button" @click="pop">Pop from array</button>
+          </div>
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
           <button v-if="!organization.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Organization</button>
@@ -104,10 +108,19 @@ export default {
         region: this.organization.region,
         country: this.organization.country,
         postal_code: this.organization.postal_code,
+        items: this.organization.items,
       }),
     }
   },
   methods: {
+    push() {
+      this.form.items.push(Math.random().toString(36).substring(7))
+    },
+    pop() {
+      if (this.form.items.length > 1) {
+        this.form.items.pop()
+      }
+    },
     update() {
       this.form.put(this.route('organizations.update', this.organization.id))
     },
